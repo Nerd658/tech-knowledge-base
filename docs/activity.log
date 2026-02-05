@@ -20,3 +20,4 @@
 [2026-02-04T17:27:33.000Z] Commit #20: docs: create api specification and contract reference (#20)
 [2026-02-05T16:20:20.000Z] Commit #21: docs: add comprehensive system architecture documentation (#21)
 [2026-02-05T15:13:07.000Z] Commit #22: test: add unit tests for bcrypt password verification and jwt (#22)
+[2026-02-05T14:06:54.000Z] Commit #23: test: add unit tests for markdown, csv, and excel export (#23)
