@@ -35,3 +35,4 @@
 [2026-02-07T14:42:18.000Z] Commit #35: feat: implement live duplicate detection warning component (#35)
 [2026-02-08T13:35:05.000Z] Commit #36: feat: add excel xlsx import and export pipeline (#36)
 [2026-02-08T12:28:52.000Z] Commit #37: feat: implement csv parser with delimiter auto-detection (#37)
+[2026-02-08T11:21:39.000Z] Commit #38: feat: add json schema export and import engine (#38)
