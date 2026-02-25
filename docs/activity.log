@@ -118,3 +118,4 @@
 [2026-02-24T15:01:19.000Z] Commit #118: feat: create dark technical login page with developer hints (#118)
 [2026-02-24T14:54:06.000Z] Commit #119: feat: implement edge middleware for route protection (#119)
 [2026-02-24T13:47:53.000Z] Commit #120: feat: add session authentication with bcrypt and jose jwt (#120)
+[2026-02-25T12:40:40.000Z] Commit #121: feat: implement categories explorer and creation modal (#121)
