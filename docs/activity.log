@@ -146,3 +146,4 @@
 [2026-03-02T11:45:15.000Z] Commit #146: feat: initialize core knowledge engine architecture (#146)
 [2026-03-02T10:38:02.000Z] Commit #147: feat: seed realistic technical scenarios for wazuh, openssl, and k8s (#147)
 [2026-03-02T09:31:49.000Z] Commit #148: fix: ensure sslmode require for neon serverless connection (#148)
+[2026-03-02T08:24:36.000Z] Commit #149: perf: add database indexes on category, status, and favorites (#149)
