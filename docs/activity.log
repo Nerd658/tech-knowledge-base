@@ -235,3 +235,4 @@
 [2026-03-19T18:22:58.000Z] Commit #235: feat: add similarity calculation engine with tokenization (#235)
 [2026-03-20T17:15:45.000Z] Commit #236: feat: initialize core knowledge engine architecture (#236)
 [2026-03-20T16:08:32.000Z] Commit #237: feat: seed realistic technical scenarios for wazuh, openssl, and k8s (#237)
+[2026-03-20T15:01:19.000Z] Commit #238: fix: ensure sslmode require for neon serverless connection (#238)
