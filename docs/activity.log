@@ -242,3 +242,4 @@
 [2026-03-21T11:33:27.000Z] Commit #242: chore: configure typescript es2022 compiler options (#242)
 [2026-03-21T10:26:14.000Z] Commit #243: docs: enrich readme with mermaid diagrams and vercel guide (#243)
 [2026-03-21T09:19:01.000Z] Commit #244: docs: document database entity relationships and schema (#244)
+[2026-03-21T08:12:48.000Z] Commit #245: docs: create api specification and contract reference (#245)
