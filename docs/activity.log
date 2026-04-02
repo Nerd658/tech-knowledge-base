@@ -300,3 +300,4 @@
 [2026-04-01T13:47:53.000Z] Commit #300: feat: add session authentication with bcrypt and jose jwt (#300)
 [2026-04-02T12:40:40.000Z] Commit #301: feat: implement categories explorer and creation modal (#301)
 [2026-04-02T11:33:27.000Z] Commit #302: feat: add command snippets global library page (#302)
+[2026-04-02T10:26:14.000Z] Commit #303: feat: implement multi-criteria search and filter queries (#303)
