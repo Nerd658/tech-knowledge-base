@@ -328,3 +328,4 @@
 [2026-04-07T09:31:49.000Z] Commit #328: fix: ensure sslmode require for neon serverless connection (#328)
 [2026-04-07T08:24:36.000Z] Commit #329: perf: add database indexes on category, status, and favorites (#329)
 [2026-04-07T19:17:23.000Z] Commit #330: refactor: extract reusable badge and alert components (#330)
+[2026-04-08T18:10:10.000Z] Commit #331: chore: setup docker compose for local postgres environment (#331)
