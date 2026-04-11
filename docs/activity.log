@@ -344,3 +344,4 @@
 [2026-04-10T17:39:21.000Z] Commit #344: feat: implement edge middleware for route protection (#344)
 [2026-04-10T16:32:08.000Z] Commit #345: feat: add session authentication with bcrypt and jose jwt (#345)
 [2026-04-11T15:25:55.000Z] Commit #346: feat: implement categories explorer and creation modal (#346)
+[2026-04-11T14:18:42.000Z] Commit #347: feat: add command snippets global library page (#347)
