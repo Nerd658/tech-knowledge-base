@@ -360,3 +360,4 @@
 [2026-04-13T13:47:53.000Z] Commit #360: feat: add 60-second quick incident capture modal (#360)
 [2026-04-14T12:40:40.000Z] Commit #361: feat: create global command palette with keyboard shortcuts (#361)
 [2026-04-14T11:33:27.000Z] Commit #362: feat: add copy-to-clipboard button with visual feedback (#362)
+[2026-04-14T10:26:14.000Z] Commit #363: feat: implement step-by-step resolution runbook component (#363)
