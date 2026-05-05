@@ -466,3 +466,4 @@
 [2026-05-05T15:25:55.000Z] Commit #466: chore: setup docker compose for local postgres environment (#466)
 [2026-05-05T14:18:42.000Z] Commit #467: chore: configure typescript es2022 compiler options (#467)
 [2026-05-05T13:11:29.000Z] Commit #468: docs: enrich readme with mermaid diagrams and vercel guide (#468)
+[2026-05-05T12:04:16.000Z] Commit #469: docs: document database entity relationships and schema (#469)
