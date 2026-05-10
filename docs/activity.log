@@ -488,3 +488,4 @@
 [2026-05-09T17:51:09.000Z] Commit #488: feat: add json schema export and import engine (#488)
 [2026-05-09T16:44:56.000Z] Commit #489: feat: implement markdown runbook exporter (#489)
 [2026-05-09T15:37:43.000Z] Commit #490: feat: add resolution test logging and validation history (#490)
+[2026-05-10T14:30:30.000Z] Commit #491: feat: implement entry versioning snapshot mechanism (#491)
