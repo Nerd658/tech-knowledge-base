@@ -494,3 +494,4 @@
 [2026-05-10T11:09:51.000Z] Commit #494: feat: implement dark technical design system with tailwindcss (#494)
 [2026-05-10T10:02:38.000Z] Commit #495: feat: add 60-second quick incident capture modal (#495)
 [2026-05-11T09:55:25.000Z] Commit #496: feat: create global command palette with keyboard shortcuts (#496)
+[2026-05-11T08:48:12.000Z] Commit #497: feat: add copy-to-clipboard button with visual feedback (#497)
