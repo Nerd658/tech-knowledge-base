@@ -501,3 +501,4 @@
 [2026-05-12T16:20:20.000Z] Commit #501: feat: add 9-point quality score checklist calculator (#501)
 [2026-05-12T15:13:07.000Z] Commit #502: perf: optimize n-gram substring matching algorithm (#502)
 [2026-05-12T14:06:54.000Z] Commit #503: feat: implement jaccard index for error message comparison (#503)
+[2026-05-12T13:59:41.000Z] Commit #504: fix: optimize stop words filter for french and english (#504)
