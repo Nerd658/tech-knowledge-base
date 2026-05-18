@@ -528,3 +528,4 @@
 [2026-05-17T13:11:29.000Z] Commit #528: feat: implement multi-criteria search and filter queries (#528)
 [2026-05-17T12:04:16.000Z] Commit #529: feat: add audit logging trail for compliance and tracking (#529)
 [2026-05-17T11:57:03.000Z] Commit #530: feat: implement live duplicate detection warning component (#530)
+[2026-05-18T10:50:50.000Z] Commit #531: feat: add excel xlsx import and export pipeline (#531)
