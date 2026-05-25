@@ -564,3 +564,4 @@
 [2026-05-24T13:59:41.000Z] Commit #564: test: add unit tests for quality score calculator (#564)
 [2026-05-24T12:52:28.000Z] Commit #565: test: add unit tests for similarity engine and jaccard (#565)
 [2026-05-25T11:45:15.000Z] Commit #566: fix: resolve prisma client generation in postinstall hook (#566)
+[2026-05-25T10:38:02.000Z] Commit #567: feat: add user profile and logout action in sidebar (#567)
