@@ -580,3 +580,4 @@
 [2026-05-27T09:07:13.000Z] Commit #580: feat: add resolution test logging and validation history (#580)
 [2026-05-28T08:00:00.000Z] Commit #581: feat: implement entry versioning snapshot mechanism (#581)
 [2026-05-28T19:53:47.000Z] Commit #582: feat: add categories and tags relational structure (#582)
+[2026-05-28T18:46:34.000Z] Commit #583: feat: add neon postgresql schema and prisma orm models (#583)
