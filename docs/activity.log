@@ -578,3 +578,4 @@
 [2026-05-27T11:21:39.000Z] Commit #578: feat: add json schema export and import engine (#578)
 [2026-05-27T10:14:26.000Z] Commit #579: feat: implement markdown runbook exporter (#579)
 [2026-05-27T09:07:13.000Z] Commit #580: feat: add resolution test logging and validation history (#580)
+[2026-05-28T08:00:00.000Z] Commit #581: feat: implement entry versioning snapshot mechanism (#581)
