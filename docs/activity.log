@@ -585,3 +585,4 @@
 [2026-05-28T16:32:08.000Z] Commit #585: feat: add 60-second quick incident capture modal (#585)
 [2026-05-29T15:25:55.000Z] Commit #586: feat: create global command palette with keyboard shortcuts (#586)
 [2026-05-29T14:18:42.000Z] Commit #587: feat: add copy-to-clipboard button with visual feedback (#587)
+[2026-05-29T13:11:29.000Z] Commit #588: feat: implement step-by-step resolution runbook component (#588)
