@@ -587,3 +587,4 @@
 [2026-05-29T14:18:42.000Z] Commit #587: feat: add copy-to-clipboard button with visual feedback (#587)
 [2026-05-29T13:11:29.000Z] Commit #588: feat: implement step-by-step resolution runbook component (#588)
 [2026-05-29T12:04:16.000Z] Commit #589: feat: create investigation steps timeline with command traces (#589)
+[2026-05-29T11:57:03.000Z] Commit #590: feat: implement quick fix summary view component (#590)
