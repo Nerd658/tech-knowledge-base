@@ -589,3 +589,4 @@
 [2026-05-29T12:04:16.000Z] Commit #589: feat: create investigation steps timeline with command traces (#589)
 [2026-05-29T11:57:03.000Z] Commit #590: feat: implement quick fix summary view component (#590)
 [2026-05-30T10:50:50.000Z] Commit #591: feat: add 9-point quality score checklist calculator (#591)
+[2026-05-30T09:43:37.000Z] Commit #592: perf: optimize n-gram substring matching algorithm (#592)
