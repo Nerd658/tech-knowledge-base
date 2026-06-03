@@ -608,3 +608,4 @@
 [2026-06-02T17:51:09.000Z] Commit #608: test: add unit tests for markdown, csv, and excel export (#608)
 [2026-06-02T16:44:56.000Z] Commit #609: test: add unit tests for quality score calculator (#609)
 [2026-06-02T15:37:43.000Z] Commit #610: test: add unit tests for similarity engine and jaccard (#610)
+[2026-06-03T14:30:30.000Z] Commit #611: fix: resolve prisma client generation in postinstall hook (#611)
