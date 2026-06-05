@@ -621,3 +621,4 @@
 [2026-06-05T16:20:20.000Z] Commit #621: feat: add excel xlsx import and export pipeline (#621)
 [2026-06-05T15:13:07.000Z] Commit #622: feat: implement csv parser with delimiter auto-detection (#622)
 [2026-06-05T14:06:54.000Z] Commit #623: feat: add json schema export and import engine (#623)
+[2026-06-05T13:59:41.000Z] Commit #624: feat: implement markdown runbook exporter (#624)
