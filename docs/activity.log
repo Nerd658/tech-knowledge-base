@@ -669,3 +669,4 @@
 [2026-06-14T16:44:56.000Z] Commit #669: feat: implement markdown runbook exporter (#669)
 [2026-06-14T15:37:43.000Z] Commit #670: feat: add resolution test logging and validation history (#670)
 [2026-06-15T14:30:30.000Z] Commit #671: feat: implement entry versioning snapshot mechanism (#671)
+[2026-06-15T13:23:17.000Z] Commit #672: feat: add categories and tags relational structure (#672)
