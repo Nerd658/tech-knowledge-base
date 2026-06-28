@@ -735,3 +735,4 @@
 [2026-06-27T10:02:38.000Z] Commit #735: refactor: extract reusable badge and alert components (#735)
 [2026-06-28T09:55:25.000Z] Commit #736: chore: setup docker compose for local postgres environment (#736)
 [2026-06-28T08:48:12.000Z] Commit #737: chore: configure typescript es2022 compiler options (#737)
+[2026-06-28T19:41:59.000Z] Commit #738: docs: enrich readme with mermaid diagrams and vercel guide (#738)
