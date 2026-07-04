@@ -763,3 +763,4 @@
 [2026-07-03T18:46:34.000Z] Commit #763: feat: add neon postgresql schema and prisma orm models (#763)
 [2026-07-03T17:39:21.000Z] Commit #764: feat: implement dark technical design system with tailwindcss (#764)
 [2026-07-03T16:32:08.000Z] Commit #765: feat: add 60-second quick incident capture modal (#765)
+[2026-07-04T15:25:55.000Z] Commit #766: feat: create global command palette with keyboard shortcuts (#766)
