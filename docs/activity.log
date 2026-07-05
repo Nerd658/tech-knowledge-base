@@ -771,3 +771,4 @@
 [2026-07-05T10:50:50.000Z] Commit #771: feat: add 9-point quality score checklist calculator (#771)
 [2026-07-05T09:43:37.000Z] Commit #772: perf: optimize n-gram substring matching algorithm (#772)
 [2026-07-05T08:36:24.000Z] Commit #773: feat: implement jaccard index for error message comparison (#773)
+[2026-07-05T19:29:11.000Z] Commit #774: fix: optimize stop words filter for french and english (#774)
