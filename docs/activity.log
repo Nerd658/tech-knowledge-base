@@ -780,3 +780,4 @@
 [2026-07-06T13:47:53.000Z] Commit #780: refactor: extract reusable badge and alert components (#780)
 [2026-07-07T12:40:40.000Z] Commit #781: chore: setup docker compose for local postgres environment (#781)
 [2026-07-07T11:33:27.000Z] Commit #782: chore: configure typescript es2022 compiler options (#782)
+[2026-07-07T10:26:14.000Z] Commit #783: docs: enrich readme with mermaid diagrams and vercel guide (#783)
