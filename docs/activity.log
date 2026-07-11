@@ -799,3 +799,4 @@
 [2026-07-10T18:34:46.000Z] Commit #799: feat: add audit logging trail for compliance and tracking (#799)
 [2026-07-10T17:27:33.000Z] Commit #800: feat: implement live duplicate detection warning component (#800)
 [2026-07-11T16:20:20.000Z] Commit #801: feat: add excel xlsx import and export pipeline (#801)
+[2026-07-11T15:13:07.000Z] Commit #802: feat: implement csv parser with delimiter auto-detection (#802)
