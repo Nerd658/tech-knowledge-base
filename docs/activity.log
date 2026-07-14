@@ -817,3 +817,4 @@
 [2026-07-14T12:28:52.000Z] Commit #817: perf: optimize n-gram substring matching algorithm (#817)
 [2026-07-14T11:21:39.000Z] Commit #818: feat: implement jaccard index for error message comparison (#818)
 [2026-07-14T10:14:26.000Z] Commit #819: fix: optimize stop words filter for french and english (#819)
+[2026-07-14T09:07:13.000Z] Commit #820: feat: add similarity calculation engine with tokenization (#820)
