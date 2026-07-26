@@ -875,3 +875,4 @@
 [2026-07-25T14:42:18.000Z] Commit #875: docs: create api specification and contract reference (#875)
 [2026-07-26T13:35:05.000Z] Commit #876: docs: add comprehensive system architecture documentation (#876)
 [2026-07-26T12:28:52.000Z] Commit #877: test: add unit tests for bcrypt password verification and jwt (#877)
+[2026-07-26T11:21:39.000Z] Commit #878: test: add unit tests for markdown, csv, and excel export (#878)
