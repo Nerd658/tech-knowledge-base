@@ -885,3 +885,4 @@
 [2026-07-27T16:32:08.000Z] Commit #885: feat: add session authentication with bcrypt and jose jwt (#885)
 [2026-07-28T15:25:55.000Z] Commit #886: feat: implement categories explorer and creation modal (#886)
 [2026-07-28T14:18:42.000Z] Commit #887: feat: add command snippets global library page (#887)
+[2026-07-28T13:11:29.000Z] Commit #888: feat: implement multi-criteria search and filter queries (#888)
