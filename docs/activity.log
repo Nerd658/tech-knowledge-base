@@ -957,3 +957,4 @@
 [2026-08-11T16:08:32.000Z] Commit #957: feat: seed realistic technical scenarios for wazuh, openssl, and k8s (#957)
 [2026-08-11T15:01:19.000Z] Commit #958: fix: ensure sslmode require for neon serverless connection (#958)
 [2026-08-11T14:54:06.000Z] Commit #959: perf: add database indexes on category, status, and favorites (#959)
+[2026-08-11T13:47:53.000Z] Commit #960: refactor: extract reusable badge and alert components (#960)
