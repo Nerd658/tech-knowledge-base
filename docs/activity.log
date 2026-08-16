@@ -982,3 +982,4 @@
 [2026-08-16T15:13:07.000Z] Commit #982: feat: implement csv parser with delimiter auto-detection (#982)
 [2026-08-16T14:06:54.000Z] Commit #983: feat: add json schema export and import engine (#983)
 [2026-08-16T13:59:41.000Z] Commit #984: feat: implement markdown runbook exporter (#984)
+[2026-08-16T12:52:28.000Z] Commit #985: feat: add resolution test logging and validation history (#985)
