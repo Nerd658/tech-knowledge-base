@@ -1,47 +1,28 @@
-2026-08-20 — Authentication System, Vercel Deployment Configuration & Full Release
+2026-08-20 — Dedicated Full-Screen Login Page & Isolated Auth Layout
 
 What changed:
-- Implemented complete Authentication & Session management:
-  * Added hashed password field to User model in Prisma schema.
-  * Created auth library (src/lib/auth.ts) with bcrypt password hashing and jose JWT session tokens.
-  * Added Auth API routes: /api/auth/login, /api/auth/logout, and /api/auth/me with HTTP-Only secure cookies.
-  * Added Next.js Edge Middleware (src/middleware.ts) protecting all dashboard, entries, commands, and admin routes.
-  * Created dark technical login page (/login) with developer access banner and credentials form.
-  * Added user session display, role badge, and logout action to Sidebar.
-  * Provisioned default administrator in database seed (admin@knowledge.local / AdminPassword123!).
-- Configured project for seamless Vercel deployment:
-  * Added "postinstall": "prisma generate" in package.json.
-  * Verified compatibility with remote Neon serverless PostgreSQL.
-  * Updated .env.example with JWT_SECRET and deployment variables.
-- Added automated unit test suite for authentication (tests/auth.test.ts).
-- Initialized git repository with clean main branch ready for remote push.
+- Isolated layout in root layout (src/app/layout.tsx):
+  * When navigating to /login, the application bypasses the Sidebar, Header, CommandPalette, and QuickCaptureModal to present a clean, dedicated full-screen authentication interface.
+  * Preserved full dashboard sidebar layout for all internal authenticated pages.
+- Enhanced login page experience (src/app/login/page.tsx):
+  * Added 1-click developer credential autofill button for instant local demo access.
+  * Added interactive password visibility toggle (Eye / EyeOff).
+  * Added cyber/dark gradient accents and ambient glow effects.
+  * Added clear notices and security badges for Neon Serverless Postgres and JWT Edge auth.
+- Pushed updates directly to GitHub repository origin main.
 
 Why:
-- To secure the knowledge base with frictionless session-based authentication without public registration, and make the application directly deployable to Vercel in 1 click.
+- To provide a dedicated, polished full-screen login interface without layout clutter when unauthenticated users access the platform.
 
 Files affected:
-- package.json — Added bcryptjs, jose, and postinstall prisma generate script
-- prisma/schema.prisma — Added password field to User model
-- prisma/seed.ts — Provisioned default admin user with bcrypt password hash
-- src/lib/auth.ts — Auth utilities, password hashing, and JWT session handling
-- src/middleware.ts — Edge middleware for route protection and redirection
-- src/app/login/page.tsx — Dark technical login page
-- src/app/api/auth/login/route.ts — Login API endpoint setting HTTP-Only session cookie
-- src/app/api/auth/logout/route.ts — Logout API endpoint clearing session cookie
-- src/app/api/auth/me/route.ts — Session verification API endpoint
-- src/components/layout/Sidebar.tsx — User profile card and logout trigger
-- tests/auth.test.ts — Unit tests for password hashing and JWT sessions
-- .env.example — Updated environment template with JWT_SECRET
-- .env — Configured local JWT_SECRET
+- src/app/layout.tsx — Layout branching for auth vs application views
+- src/app/login/page.tsx — Dedicated login page with autofill and visibility toggle
+- commit.txt — Updated tracking record
 
 Breaking changes:
-- None. Unauthenticated visitors are now routed to /login before accessing knowledge entries.
+- None.
 
 Notes for review:
-- Default credentials for initial login:
+- Default credentials remain:
   * Email: admin@knowledge.local
   * Password: AdminPassword123!
-- When configuring Vercel environment variables, set:
-  * DATABASE_URL: Neon PostgreSQL connection string
-  * JWT_SECRET: Secret key for signing sessions
-- Run "git remote add origin <your-repo-url> && git push -u origin main" to publish to GitHub/GitLab.
