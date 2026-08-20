@@ -23,6 +23,8 @@ import {
   Plus,
   Activity,
   FileCode,
+  ShieldCheck,
+  ChevronRight,
 } from "lucide-react";
 import { KnowledgeEntryDto, SimilarityMatch } from "@/types";
 import { QuickFixCard } from "@/components/entries/QuickFixCard";
@@ -43,18 +45,13 @@ export default function EntryDetailsPage() {
     "quickfix" | "investigation" | "steps" | "commands" | "relations" | "history" | "resources" | "comments" | "versions"
   >("quickfix");
 
-  // New test resolution modal state
+  // Test resolution modal state
   const [showTestModal, setShowTestModal] = useState(false);
   const [testEnv, setTestEnv] = useState("Production");
   const [testStatus, setTestStatus] = useState("SUCCESS");
   const [testNotes, setTestNotes] = useState("");
   const [testTester, setTestTester] = useState("Lead Engineer");
   const [savingTest, setSavingTest] = useState(false);
-
-  // New comment state
-  const [commentText, setCommentText] = useState("");
-  const [commentAuthor, setCommentAuthor] = useState("Engineer");
-  const [savingComment, setSavingComment] = useState(false);
 
   // Similar issues state for "J'ai déjà vu ça"
   const [similarIssues, setSimilarIssues] = useState<SimilarityMatch[]>([]);
@@ -177,7 +174,7 @@ export default function EntryDetailsPage() {
         <p className="text-xs text-slate-400">{error || "Cette fiche n'existe pas ou a été supprimée."}</p>
         <Link
           href="/entries"
-          className="inline-flex items-center gap-1.5 px-4 py-2 bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs rounded-lg transition"
+          className="inline-flex items-center gap-1.5 px-4 py-2 bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs rounded-xl transition"
         >
           <ArrowLeft className="w-4 h-4" />
           <span>Retour à la liste</span>
@@ -187,45 +184,45 @@ export default function EntryDetailsPage() {
   }
 
   return (
-    <div className="space-y-6 animate-in fade-in duration-150">
+    <div className="space-y-6 animate-in fade-in duration-200">
       {/* Top Breadcrumb & Action Bar */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-800 pb-4">
-        <div className="flex items-center gap-3">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-white/[0.07] pb-5">
+        <div className="flex items-center gap-3.5 min-w-0">
           <Link
             href="/entries"
-            className="p-2 bg-slate-900 hover:bg-slate-800 text-slate-400 hover:text-slate-200 rounded-lg transition border border-slate-800"
+            className="p-2.5 bg-slate-900/80 hover:bg-slate-850 text-slate-400 hover:text-slate-200 rounded-xl transition border border-white/[0.07] shadow-sm shrink-0"
           >
             <ArrowLeft className="w-4 h-4" />
           </Link>
-          <div>
-            <div className="flex items-center gap-2">
-              <span className="text-xs font-mono font-bold text-blue-400">
+          <div className="min-w-0">
+            <div className="flex items-center gap-2 text-xs">
+              <span className="font-mono font-bold text-blue-400 bg-blue-500/10 px-2 py-0.5 rounded-md border border-blue-500/20">
                 {entry.readableId}
               </span>
               <span className="text-slate-600">•</span>
-              <span className="text-xs text-slate-400">{entry.category?.name}</span>
+              <span className="text-slate-400">{entry.category?.name}</span>
               <span className="text-slate-600">•</span>
-              <span className="text-xs text-slate-500 font-mono">
+              <span className="text-slate-500 font-mono text-[11px]">
                 {entry.viewCount} consultations
               </span>
             </div>
-            <h1 className="text-lg sm:text-xl font-bold text-slate-100 mt-0.5">
+            <h1 className="text-lg sm:text-xl font-bold text-white mt-1 tracking-tight truncate">
               {entry.title}
             </h1>
           </div>
         </div>
 
         {/* Action Buttons */}
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-2 shrink-0">
           <QualityBadge entry={entry} />
 
           <button
             type="button"
             onClick={handleToggleFavorite}
-            className={`p-2 rounded-lg border text-xs font-semibold transition flex items-center gap-1.5 ${
+            className={`p-2 rounded-xl border text-xs font-semibold transition flex items-center gap-1.5 shadow-sm ${
               entry.isFavorite
                 ? "bg-amber-500/20 text-amber-300 border-amber-500/40"
-                : "bg-slate-900 text-slate-400 border-slate-800 hover:text-slate-200"
+                : "bg-slate-900/80 text-slate-400 border-white/[0.07] hover:text-slate-200"
             }`}
             title="Ajouter aux favoris"
           >
@@ -235,7 +232,7 @@ export default function EntryDetailsPage() {
           <a
             href={`/api/export?format=markdown&id=${entry.id}`}
             download
-            className="p-2 rounded-lg border border-slate-800 bg-slate-900 hover:bg-slate-800 text-slate-300 hover:text-white transition"
+            className="p-2 rounded-xl border border-white/[0.07] bg-slate-900/80 hover:bg-slate-850 text-slate-300 hover:text-white transition shadow-sm"
             title="Exporter en Markdown"
           >
             <Download className="w-4 h-4" />
@@ -244,7 +241,7 @@ export default function EntryDetailsPage() {
           <button
             type="button"
             onClick={() => setShowTestModal(true)}
-            className="px-3 py-2 rounded-lg bg-emerald-600/20 hover:bg-emerald-600/30 text-emerald-400 border border-emerald-500/30 text-xs font-semibold flex items-center gap-1.5 transition"
+            className="px-3.5 py-2 rounded-xl bg-emerald-500/15 hover:bg-emerald-500/25 text-emerald-400 border border-emerald-500/30 text-xs font-semibold flex items-center gap-1.5 transition shadow-sm"
           >
             <CheckCircle2 className="w-3.5 h-3.5" />
             <span>Tester / Valider</span>
@@ -253,7 +250,7 @@ export default function EntryDetailsPage() {
           <button
             type="button"
             onClick={handleDeleteEntry}
-            className="p-2 rounded-lg border border-rose-900/40 bg-rose-950/20 hover:bg-rose-900/30 text-rose-400 transition"
+            className="p-2 rounded-xl border border-rose-900/40 bg-rose-950/20 hover:bg-rose-900/30 text-rose-400 transition"
             title="Supprimer la fiche"
           >
             <Trash2 className="w-4 h-4" />
@@ -264,16 +261,16 @@ export default function EntryDetailsPage() {
       {/* 1. QUICK FIX CARD (Prominent in all cases) */}
       <QuickFixCard entry={entry} />
 
-      {/* 2. TABBED DEEP DIVE SECTIONS */}
+      {/* 2. TABBED DEEP DIVE SECTIONS (Linear Style) */}
       <div className="space-y-4 pt-2">
         {/* Navigation Tabs */}
-        <div className="flex flex-wrap items-center gap-1.5 border-b border-slate-800 pb-2 text-xs font-semibold">
+        <div className="flex flex-wrap items-center gap-1.5 border-b border-white/[0.07] pb-2 text-xs font-semibold">
           <button
             onClick={() => setActiveTab("quickfix")}
-            className={`px-3 py-1.5 rounded-lg transition ${
+            className={`px-3.5 py-2 rounded-xl transition ${
               activeTab === "quickfix"
-                ? "bg-blue-600 text-white"
-                : "text-slate-400 hover:text-slate-200 hover:bg-slate-900"
+                ? "bg-blue-600/20 text-blue-400 border border-blue-500/30 shadow-sm"
+                : "text-slate-400 hover:text-slate-200 hover:bg-slate-900/80"
             }`}
           >
             Vue Synthèse
@@ -281,15 +278,15 @@ export default function EntryDetailsPage() {
 
           <button
             onClick={() => setActiveTab("investigation")}
-            className={`px-3 py-1.5 rounded-lg transition flex items-center gap-1.5 ${
+            className={`px-3.5 py-2 rounded-xl transition flex items-center gap-1.5 ${
               activeTab === "investigation"
-                ? "bg-blue-600 text-white"
-                : "text-slate-400 hover:text-slate-200 hover:bg-slate-900"
+                ? "bg-blue-600/20 text-blue-400 border border-blue-500/30 shadow-sm"
+                : "text-slate-400 hover:text-slate-200 hover:bg-slate-900/80"
             }`}
           >
             <span>Investigation & Raisonnement</span>
             {entry.investigations && entry.investigations.length > 0 && (
-              <span className="px-1.5 py-0.2 rounded-full text-[10px] bg-slate-800 text-slate-300">
+              <span className="px-1.5 py-0.2 rounded-md text-[10px] bg-slate-800 text-slate-300 font-mono">
                 {entry.investigations.length}
               </span>
             )}
@@ -297,15 +294,15 @@ export default function EntryDetailsPage() {
 
           <button
             onClick={() => setActiveTab("steps")}
-            className={`px-3 py-1.5 rounded-lg transition flex items-center gap-1.5 ${
+            className={`px-3.5 py-2 rounded-xl transition flex items-center gap-1.5 ${
               activeTab === "steps"
-                ? "bg-blue-600 text-white"
-                : "text-slate-400 hover:text-slate-200 hover:bg-slate-900"
+                ? "bg-blue-600/20 text-blue-400 border border-blue-500/30 shadow-sm"
+                : "text-slate-400 hover:text-slate-200 hover:bg-slate-900/80"
             }`}
           >
             <span>Procédure Détaillée</span>
             {entry.resolutionSteps && entry.resolutionSteps.length > 0 && (
-              <span className="px-1.5 py-0.2 rounded-full text-[10px] bg-slate-800 text-slate-300">
+              <span className="px-1.5 py-0.2 rounded-md text-[10px] bg-slate-800 text-slate-300 font-mono">
                 {entry.resolutionSteps.length}
               </span>
             )}
@@ -313,10 +310,10 @@ export default function EntryDetailsPage() {
 
           <button
             onClick={() => setActiveTab("commands")}
-            className={`px-3 py-1.5 rounded-lg transition flex items-center gap-1.5 ${
+            className={`px-3.5 py-2 rounded-xl transition flex items-center gap-1.5 ${
               activeTab === "commands"
-                ? "bg-blue-600 text-white"
-                : "text-slate-400 hover:text-slate-200 hover:bg-slate-900"
+                ? "bg-blue-600/20 text-blue-400 border border-blue-500/30 shadow-sm"
+                : "text-slate-400 hover:text-slate-200 hover:bg-slate-900/80"
             }`}
           >
             <Terminal className="w-3.5 h-3.5" />
@@ -325,10 +322,10 @@ export default function EntryDetailsPage() {
 
           <button
             onClick={() => setActiveTab("relations")}
-            className={`px-3 py-1.5 rounded-lg transition flex items-center gap-1.5 ${
+            className={`px-3.5 py-2 rounded-xl transition flex items-center gap-1.5 ${
               activeTab === "relations"
-                ? "bg-blue-600 text-white"
-                : "text-slate-400 hover:text-slate-200 hover:bg-slate-900"
+                ? "bg-blue-600/20 text-blue-400 border border-blue-500/30 shadow-sm"
+                : "text-slate-400 hover:text-slate-200 hover:bg-slate-900/80"
             }`}
           >
             <GitCompare className="w-3.5 h-3.5" />
@@ -337,10 +334,10 @@ export default function EntryDetailsPage() {
 
           <button
             onClick={() => setActiveTab("history")}
-            className={`px-3 py-1.5 rounded-lg transition flex items-center gap-1.5 ${
+            className={`px-3.5 py-2 rounded-xl transition flex items-center gap-1.5 ${
               activeTab === "history"
-                ? "bg-blue-600 text-white"
-                : "text-slate-400 hover:text-slate-200 hover:bg-slate-900"
+                ? "bg-blue-600/20 text-blue-400 border border-blue-500/30 shadow-sm"
+                : "text-slate-400 hover:text-slate-200 hover:bg-slate-900/80"
             }`}
           >
             <History className="w-3.5 h-3.5" />
@@ -349,10 +346,10 @@ export default function EntryDetailsPage() {
 
           <button
             onClick={() => setActiveTab("resources")}
-            className={`px-3 py-1.5 rounded-lg transition flex items-center gap-1.5 ${
+            className={`px-3.5 py-2 rounded-xl transition flex items-center gap-1.5 ${
               activeTab === "resources"
-                ? "bg-blue-600 text-white"
-                : "text-slate-400 hover:text-slate-200 hover:bg-slate-900"
+                ? "bg-blue-600/20 text-blue-400 border border-blue-500/30 shadow-sm"
+                : "text-slate-400 hover:text-slate-200 hover:bg-slate-900/80"
             }`}
           >
             <BookOpen className="w-3.5 h-3.5" />
@@ -361,10 +358,10 @@ export default function EntryDetailsPage() {
 
           <button
             onClick={() => setActiveTab("versions")}
-            className={`px-3 py-1.5 rounded-lg transition flex items-center gap-1.5 ${
+            className={`px-3.5 py-2 rounded-xl transition flex items-center gap-1.5 ${
               activeTab === "versions"
-                ? "bg-blue-600 text-white"
-                : "text-slate-400 hover:text-slate-200 hover:bg-slate-900"
+                ? "bg-blue-600/20 text-blue-400 border border-blue-500/30 shadow-sm"
+                : "text-slate-400 hover:text-slate-200 hover:bg-slate-900/80"
             }`}
           >
             <span>Versions ({entry.versions?.length || 1})</span>
@@ -379,7 +376,7 @@ export default function EntryDetailsPage() {
               <div className="md:col-span-2 space-y-4">
                 {/* Contexte d'apparition */}
                 {entry.contextDescription && (
-                  <div className="bg-slate-900/80 border border-slate-800 rounded-xl p-4 space-y-1.5">
+                  <div className="glass-panel border border-white/[0.07] rounded-2xl p-5 space-y-2">
                     <h4 className="text-xs font-mono font-bold uppercase text-slate-400">
                       Contexte & Environnement
                     </h4>
@@ -391,7 +388,7 @@ export default function EntryDetailsPage() {
 
                 {/* Description complète du problème */}
                 {entry.problemDescription && (
-                  <div className="bg-slate-900/80 border border-slate-800 rounded-xl p-4 space-y-1.5">
+                  <div className="glass-panel border border-white/[0.07] rounded-2xl p-5 space-y-2">
                     <h4 className="text-xs font-mono font-bold uppercase text-slate-400">
                       Description Technique
                     </h4>
@@ -403,7 +400,7 @@ export default function EntryDetailsPage() {
 
                 {/* Conditions de déclenchement */}
                 {entry.triggerConditions && (
-                  <div className="bg-slate-900/80 border border-slate-800 rounded-xl p-4 space-y-1.5">
+                  <div className="glass-panel border border-white/[0.07] rounded-2xl p-5 space-y-2">
                     <h4 className="text-xs font-mono font-bold uppercase text-slate-400">
                       Facteur Déclencheur
                     </h4>
@@ -416,26 +413,26 @@ export default function EntryDetailsPage() {
 
               {/* Sidebar Info */}
               <div className="space-y-4 text-xs">
-                <div className="bg-slate-900/80 border border-slate-800 rounded-xl p-4 space-y-3">
-                  <h4 className="font-semibold text-slate-200 border-b border-slate-800 pb-2">
+                <div className="glass-panel border border-white/[0.07] rounded-2xl p-5 space-y-3.5">
+                  <h4 className="font-semibold text-white border-b border-white/[0.07] pb-2.5">
                     Classification & Systèmes
                   </h4>
-                  <div className="space-y-2">
+                  <div className="space-y-2.5">
                     <div>
-                      <span className="text-slate-500 block">Environnement :</span>
-                      <span className="font-medium text-slate-300">{entry.environment}</span>
+                      <span className="text-slate-400 block font-mono text-[11px]">Environnement :</span>
+                      <span className="font-medium text-slate-200">{entry.environment}</span>
                     </div>
                     <div>
-                      <span className="text-slate-500 block">Catégorie Cause :</span>
-                      <span className="font-medium text-amber-300">{entry.rootCauseCategory}</span>
+                      <span className="text-slate-400 block font-mono text-[11px]">Catégorie Cause :</span>
+                      <span className="font-medium text-amber-300 font-mono">{entry.rootCauseCategory}</span>
                     </div>
                     <div>
-                      <span className="text-slate-500 block">Technologies :</span>
-                      <div className="flex flex-wrap gap-1 mt-1">
+                      <span className="text-slate-400 block font-mono text-[11px]">Technologies :</span>
+                      <div className="flex flex-wrap gap-1.5 mt-1.5">
                         {(entry.technologies || []).map((tech, i) => (
                           <span
                             key={i}
-                            className="bg-slate-800 text-blue-300 px-2 py-0.5 rounded text-[11px] font-mono"
+                            className="bg-blue-950/40 border border-blue-800/40 text-blue-300 px-2 py-0.5 rounded-md text-[11px] font-mono"
                           >
                             {tech}
                           </span>
@@ -443,12 +440,12 @@ export default function EntryDetailsPage() {
                       </div>
                     </div>
                     <div>
-                      <span className="text-slate-500 block">Outils concernés :</span>
-                      <div className="flex flex-wrap gap-1 mt-1">
+                      <span className="text-slate-400 block font-mono text-[11px]">Outils concernés :</span>
+                      <div className="flex flex-wrap gap-1.5 mt-1.5">
                         {(entry.tools || []).map((tool, i) => (
                           <span
                             key={i}
-                            className="bg-slate-800 text-slate-300 px-2 py-0.5 rounded text-[11px] font-mono"
+                            className="bg-slate-800/80 border border-white/[0.05] text-slate-300 px-2 py-0.5 rounded-md text-[11px] font-mono"
                           >
                             {tool}
                           </span>
@@ -464,7 +461,7 @@ export default function EntryDetailsPage() {
           {/* TAB 2: INVESTIGATION */}
           {activeTab === "investigation" && (
             <div className="space-y-4">
-              <h3 className="text-sm font-bold text-slate-200 flex items-center gap-2">
+              <h3 className="text-sm font-bold text-white flex items-center gap-2">
                 <Sparkles className="w-4 h-4 text-blue-400" />
                 <span>Démarche d'Investigation & Raisonnement Technique</span>
               </h3>
@@ -475,7 +472,7 @@ export default function EntryDetailsPage() {
           {/* TAB 3: RESOLUTION STEPS */}
           {activeTab === "steps" && (
             <div className="space-y-4">
-              <h3 className="text-sm font-bold text-slate-200">
+              <h3 className="text-sm font-bold text-white">
                 Procédure de Résolution Pas-à-Pas (Runbook)
               </h3>
               <ResolutionStepsList steps={entry.resolutionSteps || []} />
@@ -485,7 +482,7 @@ export default function EntryDetailsPage() {
           {/* TAB 4: COMMANDS SNIPPETS */}
           {activeTab === "commands" && (
             <div className="space-y-4">
-              <h3 className="text-sm font-bold text-slate-200">
+              <h3 className="text-sm font-bold text-white">
                 Commandes & Extraits de Code
               </h3>
               <div className="space-y-3">
@@ -493,10 +490,10 @@ export default function EntryDetailsPage() {
                   <p className="text-xs text-slate-500 italic">Aucune commande enregistrée.</p>
                 )}
                 {entry.commands?.map((cmd, idx) => (
-                  <div key={idx} className="bg-slate-900 border border-slate-800 rounded-xl p-4 space-y-2">
+                  <div key={idx} className="glass-card rounded-2xl p-4 space-y-2.5">
                     <div className="flex items-center justify-between">
                       <div className="flex items-center gap-2">
-                        <span className="text-[10px] font-mono uppercase bg-slate-800 px-2 py-0.5 rounded text-slate-300 font-bold">
+                        <span className="text-[10px] font-mono uppercase bg-blue-500/10 border border-blue-500/20 px-2 py-0.5 rounded-md text-blue-400 font-bold">
                           {cmd.language}
                         </span>
                         <span className="text-xs font-semibold text-slate-200">
@@ -508,13 +505,13 @@ export default function EntryDetailsPage() {
                     {cmd.context && (
                       <p className="text-[11px] text-slate-400 italic">{cmd.context}</p>
                     )}
-                    <pre className="bg-black/90 p-3 rounded-lg text-xs font-mono text-emerald-400 border border-slate-800 overflow-x-auto">
+                    <pre className="bg-black/90 p-3 rounded-xl text-xs font-mono text-emerald-400 border border-white/[0.06] overflow-x-auto shadow-inner">
                       <code>{cmd.command}</code>
                     </pre>
                     {cmd.expectedOutput && (
                       <div className="text-[11px] font-mono text-slate-400 pt-1">
                         <span className="text-slate-500">Résultat attendu : </span>
-                        <code className="text-slate-300">{cmd.expectedOutput}</code>
+                        <code className="text-slate-300 font-medium">{cmd.expectedOutput}</code>
                       </div>
                     )}
                   </div>
@@ -527,29 +524,29 @@ export default function EntryDetailsPage() {
           {activeTab === "relations" && (
             <div className="space-y-4">
               <div className="flex items-center justify-between">
-                <h3 className="text-sm font-bold text-slate-200 flex items-center gap-2">
+                <h3 className="text-sm font-bold text-white flex items-center gap-2">
                   <Sparkles className="w-4 h-4 text-blue-400" />
                   <span>Problèmes Similaires Détectés ("J'ai déjà vu ça")</span>
                 </h3>
               </div>
 
               {similarIssues.length === 0 ? (
-                <div className="text-center py-10 bg-slate-900/40 border border-slate-800 rounded-xl text-xs text-slate-500 italic">
+                <div className="text-center py-10 glass-panel border border-white/[0.06] rounded-2xl text-xs text-slate-500 italic">
                   Aucun problème similaire détecté dans la base pour le moment.
                 </div>
               ) : (
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
                   {similarIssues.map((match) => (
                     <Link
                       key={match.id}
                       href={`/entries/${match.id}`}
-                      className="p-4 bg-slate-900/80 hover:bg-slate-850 border border-slate-800 hover:border-slate-700 rounded-xl transition space-y-2 block group"
+                      className="p-4 glass-card rounded-2xl transition space-y-2 block group border border-white/[0.06] hover:border-blue-500/30"
                     >
                       <div className="flex items-center justify-between">
                         <span className="text-[11px] font-mono font-bold text-blue-400">
                           {match.readableId}
                         </span>
-                        <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-blue-500/20 text-blue-300 border border-blue-500/30">
+                        <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-blue-500/15 text-blue-300 border border-blue-500/25">
                           {match.similarityScore}% similarité
                         </span>
                       </div>
@@ -570,19 +567,19 @@ export default function EntryDetailsPage() {
           {activeTab === "history" && (
             <div className="space-y-4">
               <div className="flex items-center justify-between">
-                <h3 className="text-sm font-bold text-slate-200">
+                <h3 className="text-sm font-bold text-white">
                   Historique des Tests & Re-validations
                 </h3>
                 <button
                   onClick={() => setShowTestModal(true)}
-                  className="px-3 py-1.5 bg-blue-600 hover:bg-blue-500 text-white rounded-lg text-xs font-semibold transition"
+                  className="px-3.5 py-2 bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white rounded-xl text-xs font-semibold transition shadow-md shadow-blue-600/20"
                 >
                   + Enregistrer un nouveau test
                 </button>
               </div>
 
               {(!entry.resolutionHistories || entry.resolutionHistories.length === 0) ? (
-                <div className="text-center py-10 bg-slate-900/40 border border-slate-800 rounded-xl text-xs text-slate-500 italic">
+                <div className="text-center py-10 glass-panel border border-white/[0.06] rounded-2xl text-xs text-slate-500 italic">
                   Aucun historique de test enregistré pour le moment.
                 </div>
               ) : (
@@ -590,7 +587,7 @@ export default function EntryDetailsPage() {
                   {entry.resolutionHistories.map((hist, idx) => (
                     <div
                       key={idx}
-                      className="bg-slate-900/80 border border-slate-800 rounded-xl p-4 flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-xs"
+                      className="glass-card rounded-2xl p-4 flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-xs border border-white/[0.06]"
                     >
                       <div className="space-y-1">
                         <div className="flex items-center gap-2">
@@ -609,11 +606,11 @@ export default function EntryDetailsPage() {
 
                       <div className="shrink-0">
                         {hist.resultStatus === "SUCCESS" ? (
-                          <span className="px-2.5 py-1 rounded-full text-xs font-semibold bg-emerald-500/10 text-emerald-400 border border-emerald-500/30">
+                          <span className="px-3 py-1 rounded-full text-xs font-semibold bg-emerald-500/10 text-emerald-400 border border-emerald-500/30 shadow-sm">
                             ✓ Résolu avec succès
                           </span>
                         ) : (
-                          <span className="px-2.5 py-1 rounded-full text-xs font-semibold bg-rose-500/10 text-rose-400 border border-rose-500/30">
+                          <span className="px-3 py-1 rounded-full text-xs font-semibold bg-rose-500/10 text-rose-400 border border-rose-500/30 shadow-sm">
                             ✕ Échec
                           </span>
                         )}
@@ -628,25 +625,25 @@ export default function EntryDetailsPage() {
           {/* TAB 7: RESOURCES */}
           {activeTab === "resources" && (
             <div className="space-y-4">
-              <h3 className="text-sm font-bold text-slate-200">
+              <h3 className="text-sm font-bold text-white">
                 Documentation & Ressources Associées
               </h3>
               {(!entry.resources || entry.resources.length === 0) ? (
-                <div className="text-center py-10 bg-slate-900/40 border border-slate-800 rounded-xl text-xs text-slate-500 italic">
+                <div className="text-center py-10 glass-panel border border-white/[0.06] rounded-2xl text-xs text-slate-500 italic">
                   Aucune ressource externe renseignée.
                 </div>
               ) : (
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
                   {entry.resources.map((res, idx) => (
                     <a
                       key={idx}
                       href={res.url}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="p-4 bg-slate-900/80 hover:bg-slate-850 border border-slate-800 hover:border-slate-700 rounded-xl transition space-y-1 block group"
+                      className="p-4 glass-card rounded-2xl transition space-y-1.5 block group border border-white/[0.06] hover:border-blue-500/30"
                     >
                       <div className="flex items-center justify-between">
-                        <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-slate-800 text-blue-400">
+                        <span className="text-[10px] font-mono px-2 py-0.5 rounded-md bg-blue-500/10 text-blue-400 border border-blue-500/20">
                           {res.resourceType}
                         </span>
                         <ExternalLink className="w-3.5 h-3.5 text-slate-500 group-hover:text-blue-400 transition" />
@@ -667,14 +664,14 @@ export default function EntryDetailsPage() {
           {/* TAB 8: VERSIONING */}
           {activeTab === "versions" && (
             <div className="space-y-4">
-              <h3 className="text-sm font-bold text-slate-200">
+              <h3 className="text-sm font-bold text-white">
                 Historique Immuable des Versions
               </h3>
               <div className="space-y-3">
                 {entry.versions?.map((v, idx) => (
                   <div
                     key={idx}
-                    className="bg-slate-900/80 border border-slate-800 rounded-xl p-4 flex items-center justify-between text-xs"
+                    className="glass-card rounded-2xl p-4 flex items-center justify-between text-xs border border-white/[0.06]"
                   >
                     <div>
                       <div className="flex items-center gap-2">
@@ -686,7 +683,7 @@ export default function EntryDetailsPage() {
                           {new Date(v.createdAt).toLocaleString("fr-FR")}
                         </span>
                         <span className="text-slate-600">•</span>
-                        <span className="text-slate-500">{v.modifiedBy}</span>
+                        <span className="text-slate-400">{v.modifiedBy}</span>
                       </div>
                       <p className="text-slate-300 mt-1">{v.changeSummary}</p>
                     </div>
@@ -700,9 +697,9 @@ export default function EntryDetailsPage() {
 
       {/* Test & Revalidation Modal */}
       {showTestModal && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm">
-          <div className="w-full max-w-md bg-slate-900 border border-slate-700 rounded-2xl p-6 space-y-4 shadow-2xl">
-            <h3 className="text-sm font-bold text-slate-100 flex items-center gap-2">
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md">
+          <div className="w-full max-w-md glass-panel border border-white/[0.12] rounded-2xl p-6 space-y-4 shadow-2xl animate-in fade-in zoom-in-95 duration-150">
+            <h3 className="text-sm font-bold text-white flex items-center gap-2">
               <CheckCircle2 className="w-4 h-4 text-emerald-400" />
               <span>Enregistrer un test de validation</span>
             </h3>
@@ -715,7 +712,7 @@ export default function EntryDetailsPage() {
                 <select
                   value={testEnv}
                   onChange={(e) => setTestEnv(e.target.value)}
-                  className="w-full bg-slate-950 border border-slate-800 rounded-lg p-2 text-slate-200"
+                  className="w-full bg-slate-950/90 border border-white/[0.08] rounded-xl p-2.5 text-slate-200 focus:outline-none"
                 >
                   <option value="Production">Production</option>
                   <option value="Staging">Staging</option>
@@ -731,7 +728,7 @@ export default function EntryDetailsPage() {
                 <select
                   value={testStatus}
                   onChange={(e) => setTestStatus(e.target.value)}
-                  className="w-full bg-slate-950 border border-slate-800 rounded-lg p-2 text-slate-200"
+                  className="w-full bg-slate-950/90 border border-white/[0.08] rounded-xl p-2.5 text-slate-200 focus:outline-none"
                 >
                   <option value="SUCCESS">🟢 Validé / Résolu</option>
                   <option value="FAILURE">🔴 Échec</option>
@@ -749,7 +746,7 @@ export default function EntryDetailsPage() {
                   value={testNotes}
                   onChange={(e) => setTestNotes(e.target.value)}
                   placeholder="Ex: Testé sur le cluster de production après rotation du certificat. 100% des flux sont rétablis sans régression."
-                  className="w-full bg-slate-950 border border-slate-800 rounded-lg p-2 text-slate-200 focus:outline-none"
+                  className="w-full bg-slate-950/90 border border-white/[0.08] rounded-xl p-2.5 text-slate-200 focus:outline-none"
                 />
               </div>
 
@@ -757,14 +754,14 @@ export default function EntryDetailsPage() {
                 <button
                   type="button"
                   onClick={() => setShowTestModal(false)}
-                  className="px-3 py-1.5 rounded-lg bg-slate-800 text-slate-300"
+                  className="px-3.5 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 transition"
                 >
                   Annuler
                 </button>
                 <button
                   type="submit"
                   disabled={savingTest}
-                  className="px-4 py-1.5 rounded-lg bg-emerald-600 hover:bg-emerald-500 text-white font-semibold"
+                  className="px-4 py-2 rounded-xl bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white font-semibold shadow-md shadow-emerald-600/20 transition active:scale-95"
                 >
                   {savingTest ? "Enregistrement..." : "Confirmer la validation"}
                 </button>

@@ -1,28 +1,36 @@
-2026-08-20 — Dedicated Full-Screen Login Page & Isolated Auth Layout
+2026-08-20 — Professional Linear & Raycast UI/UX Redesign
 
 What changed:
-- Isolated layout in root layout (src/app/layout.tsx):
-  * When navigating to /login, the application bypasses the Sidebar, Header, CommandPalette, and QuickCaptureModal to present a clean, dedicated full-screen authentication interface.
-  * Preserved full dashboard sidebar layout for all internal authenticated pages.
-- Enhanced login page experience (src/app/login/page.tsx):
-  * Added 1-click developer credential autofill button for instant local demo access.
-  * Added interactive password visibility toggle (Eye / EyeOff).
-  * Added cyber/dark gradient accents and ambient glow effects.
-  * Added clear notices and security badges for Neon Serverless Postgres and JWT Edge auth.
-- Pushed updates directly to GitHub repository origin main.
+- Upgraded Design System to Linear/Geist standards (src/app/globals.css):
+  * Added obsidian background palette (#070a12) with radial luminous lighting layers.
+  * Introduced glassmorphic surface utility classes (.glass-panel, .glass-card) with fine borders (border-white/[0.07]) and subtle hover elevation.
+  * Added custom sleek scrollbars and micro-interaction focus rings.
+- Refactored Navigation & Layout:
+  * Header (src/components/layout/Header.tsx): Raycast/Linear style search trigger with keyboard badges (⌘K), dynamic breadcrumbs, and gradient action buttons.
+  * Sidebar (src/components/layout/Sidebar.tsx): Linear workspace branding, active tab glowing indicators, categorized count badges, and user session footer.
+- Redesigned Key Views:
+  * Dashboard (src/app/page.tsx): Spotlight search hero with technical suggestion chips, minimal KPI metric cards with icons and trend badges, and glassmorphic leaderboard containers.
+  * Incident Explorer (src/app/entries/page.tsx): Refined multi-criteria filter bar, segmented status selectors, glass cards with quality score rings, and 1-click command copying.
+  * Incident Detail & Runbook (src/app/entries/[id]/page.tsx): Prominent Quick-Fix hero banner, glowing timeline spine for investigation hypotheses, terminal code containers, and tabbed runbook views.
+  * Command Library (src/app/commands/page.tsx): Raycast command cheat sheet layout with language filters and copy feedback.
+  * Quality Score Badge (src/components/entries/QualityBadge.tsx): Micro-progress bar and glassmorphic checklist popover breakdown.
+- Synchronized and pushed updates to GitHub repository origin main.
 
 Why:
-- To provide a dedicated, polished full-screen login interface without layout clutter when unauthenticated users access the platform.
+- To align the user interface with industry-leading developer tools (Linear, Raycast, Supabase, Vercel) with high-density information, refined contrast, and clean micro-interactions.
 
 Files affected:
-- src/app/layout.tsx — Layout branching for auth vs application views
-- src/app/login/page.tsx — Dedicated login page with autofill and visibility toggle
+- src/app/globals.css — Design tokens, glassmorphism, and radial gradients
+- src/components/layout/Header.tsx — Raycast search trigger and breadcrumbs
+- src/components/layout/Sidebar.tsx — Linear navigation and workspace header
+- src/app/page.tsx — Dashboard spotlight and KPI redesign
+- src/app/entries/page.tsx — Explorer filters and glass card redesign
+- src/app/entries/[id]/page.tsx — Incident sheet, tabs, and runbook layout
+- src/components/entries/QuickFixCard.tsx — Quick-Fix hero banner and terminal cards
+- src/components/entries/InvestigationTimeline.tsx — Glowing investigation spine
+- src/components/entries/QualityBadge.tsx — Micro progress bar and popover
+- src/app/commands/page.tsx — Command library redesign
 - commit.txt — Updated tracking record
 
 Breaking changes:
 - None.
-
-Notes for review:
-- Default credentials remain:
-  * Email: admin@knowledge.local
-  * Password: AdminPassword123!

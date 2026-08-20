@@ -50,10 +50,10 @@ export default function CommandsLibraryPage() {
   ];
 
   return (
-    <div className="space-y-6 animate-in fade-in duration-150">
+    <div className="space-y-6 animate-in fade-in duration-200">
       {/* Header */}
-      <div className="border-b border-slate-800 pb-4">
-        <h1 className="text-xl font-bold text-slate-100 flex items-center gap-2.5">
+      <div className="border-b border-white/[0.07] pb-4">
+        <h1 className="text-xl font-bold text-white flex items-center gap-2.5 tracking-tight">
           <Terminal className="w-5 h-5 text-blue-400" />
           <span>Bibliothèque de Commandes & Snippets</span>
         </h1>
@@ -63,15 +63,15 @@ export default function CommandsLibraryPage() {
       </div>
 
       {/* Filter & Search Bar */}
-      <div className="bg-slate-900/80 border border-slate-800 rounded-xl p-4 flex flex-col sm:flex-row gap-3">
+      <div className="glass-panel border border-white/[0.08] rounded-2xl p-4 flex flex-col sm:flex-row gap-3 shadow-lg">
         <form onSubmit={handleSearchSubmit} className="relative flex-1">
-          <Search className="absolute left-3 top-2.5 w-4 h-4 text-slate-500" />
+          <Search className="absolute left-3.5 top-3 w-4 h-4 text-slate-500" />
           <input
             type="text"
             value={search}
             onChange={(e) => setSearch(e.target.value)}
             placeholder="Rechercher une commande, un flag, un port (ex: ss -lunp, iptables, openssl, tcpdump)..."
-            className="w-full pl-9 pr-3 py-2 bg-slate-950 border border-slate-800 focus:border-blue-500 rounded-lg text-xs text-slate-100 placeholder-slate-500 focus:outline-none"
+            className="w-full pl-10 pr-3 py-2.5 bg-slate-950/90 border border-white/[0.08] focus:border-blue-500 rounded-xl text-xs text-slate-100 placeholder-slate-500 focus:outline-none transition shadow-inner font-mono"
           />
         </form>
 
@@ -79,7 +79,7 @@ export default function CommandsLibraryPage() {
           <select
             value={selectedLang}
             onChange={(e) => setSelectedLang(e.target.value)}
-            className="bg-slate-950 border border-slate-800 rounded-lg px-3 py-2 text-xs text-slate-300 focus:outline-none font-mono"
+            className="bg-slate-950/90 border border-white/[0.08] rounded-xl px-3.5 py-2.5 text-xs text-slate-300 focus:outline-none font-mono transition"
           >
             {languages.map((lang) => (
               <option key={lang.value} value={lang.value}>
@@ -91,9 +91,9 @@ export default function CommandsLibraryPage() {
           <button
             type="button"
             onClick={fetchCommands}
-            className="px-4 py-2 bg-blue-600 hover:bg-blue-500 text-white rounded-lg text-xs font-semibold transition"
+            className="px-4 py-2.5 bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white rounded-xl text-xs font-semibold transition shadow-md shadow-blue-600/20 active:scale-95"
           >
-            Rechercher
+            Filtrer
           </button>
         </div>
       </div>
@@ -104,11 +104,11 @@ export default function CommandsLibraryPage() {
           Chargement des snippets techniques...
         </div>
       ) : commands.length === 0 ? (
-        <div className="text-center py-16 bg-slate-900/40 border border-slate-800 rounded-2xl p-8 space-y-2">
+        <div className="text-center py-16 glass-panel border border-white/[0.06] rounded-2xl p-8 space-y-2">
           <Code2 className="w-8 h-8 text-slate-600 mx-auto" />
           <h3 className="text-base font-bold text-slate-300">Aucune commande trouvée</h3>
           <p className="text-xs text-slate-500">
-            Aucun snippet ne correspond à votre recherche.
+            Aucun snippet ne correspond à vos critères de recherche.
           </p>
         </div>
       ) : (
@@ -116,12 +116,12 @@ export default function CommandsLibraryPage() {
           {commands.map((cmd) => (
             <div
               key={cmd.id}
-              className="bg-slate-900/90 border border-slate-800 hover:border-slate-700 rounded-xl p-4 space-y-3 transition group"
+              className="glass-card rounded-2xl p-4 space-y-3 transition-all group"
             >
               {/* Header description + Language badge + Copy */}
               <div className="flex flex-wrap items-center justify-between gap-2">
-                <div className="flex items-center gap-2">
-                  <span className="text-[10px] font-mono uppercase font-bold px-2 py-0.5 rounded bg-slate-800 text-blue-400 border border-slate-700">
+                <div className="flex items-center gap-2.5">
+                  <span className="text-[10px] font-mono uppercase font-bold px-2 py-0.5 rounded-md bg-blue-500/10 text-blue-400 border border-blue-500/20">
                     {cmd.language}
                   </span>
                   <span className="text-xs font-bold text-slate-200">
@@ -129,11 +129,11 @@ export default function CommandsLibraryPage() {
                   </span>
                 </div>
 
-                <div className="flex items-center gap-2">
+                <div className="flex items-center gap-2.5">
                   {cmd.entry && (
                     <Link
                       href={`/entries/${cmd.entry.id}`}
-                      className="inline-flex items-center gap-1 text-[11px] font-mono text-slate-400 hover:text-blue-400 transition"
+                      className="inline-flex items-center gap-1 text-[11px] font-mono text-slate-400 hover:text-blue-400 bg-slate-900/80 px-2 py-0.5 rounded-md border border-white/[0.05] transition"
                     >
                       <span>{cmd.entry.readableId}</span>
                       <ExternalLink className="w-3 h-3" />
@@ -144,18 +144,18 @@ export default function CommandsLibraryPage() {
               </div>
 
               {/* Code block */}
-              <pre className="bg-black/90 rounded-lg p-3 text-xs font-mono text-emerald-400 border border-slate-850 overflow-x-auto selection:bg-emerald-950">
+              <pre className="bg-black/90 rounded-xl p-3 text-xs font-mono text-emerald-400 border border-white/[0.06] overflow-x-auto shadow-inner selection:bg-emerald-950">
                 <code>{cmd.command}</code>
               </pre>
 
               {/* Expected output & Context */}
               {(cmd.expectedOutput || cmd.context) && (
-                <div className="pt-2 border-t border-slate-800/60 flex flex-col sm:flex-row sm:items-center justify-between gap-2 text-[11px] text-slate-400 font-mono">
+                <div className="pt-2.5 border-t border-white/[0.06] flex flex-col sm:flex-row sm:items-center justify-between gap-2 text-[11px] text-slate-400 font-mono">
                   {cmd.context && <div>Contexte : {cmd.context}</div>}
                   {cmd.expectedOutput && (
                     <div>
                       <span className="text-slate-500">Attendu : </span>
-                      <span className="text-slate-300">{cmd.expectedOutput}</span>
+                      <span className="text-slate-300 font-medium">{cmd.expectedOutput}</span>
                     </div>
                   )}
                 </div>
