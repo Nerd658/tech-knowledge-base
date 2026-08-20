@@ -1,0 +1,19 @@
+version: "3.8"
+
+services:
+  # Optionnel : Base PostgreSQL locale de secours
+  postgres:
+    image: postgres:16-alpine
+    container_name: tech_kb_postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: tech_user
+      POSTGRES_PASSWORD: tech_password
+      POSTGRES_DB: tech_memory_db
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+volumes:
+  pgdata:

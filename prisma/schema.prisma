@@ -1,0 +1,320 @@
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+enum EntryStatus {
+  DRAFT
+  VALIDATED
+  OUTDATED
+  DEPRECATED
+  UNRESOLVED
+}
+
+enum ConfidenceLevel {
+  VALIDATED
+  PROBABLE
+  PARTIAL
+  UNRESOLVED
+}
+
+enum RootCauseCategory {
+  CONFIGURATION
+  NETWORK
+  DNS
+  TLS
+  AUTHENTICATION
+  AUTHORIZATION
+  DEPENDENCY
+  SOFTWARE_BUG
+  INFRASTRUCTURE
+  PERFORMANCE
+  SECURITY
+  HUMAN_ERROR
+  UNKNOWN
+}
+
+enum ResourceType {
+  OFFICIAL_DOC
+  ARTICLE
+  GITHUB
+  STACKOVERFLOW
+  TICKET
+  RFC
+  CVE
+  INTERNAL_DOC
+  VIDEO
+  PDF
+  OTHER
+}
+
+enum RelationType {
+  SIMILAR_PROBLEM
+  SIMILAR_CAUSE
+  ALTERNATIVE_SOLUTION
+  PARENT_PROBLEM
+  CHILD_PROBLEM
+  REGRESSION
+  SUPERSEDED_BY
+}
+
+enum ResolutionStatus {
+  SUCCESS
+  FAILURE
+  PARTIAL
+}
+
+model User {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  name      String
+  password  String   @default("")
+  role      String   @default("ENGINEER")
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Category {
+  id          String           @id @default(cuid())
+  name        String           @unique
+  slug        String           @unique
+  icon        String?          @default("Folder")
+  description String?
+  parentId    String?
+  parent      Category?        @relation("CategoryHierarchy", fields: [parentId], references: [id], onDelete: Cascade)
+  children    Category[]       @relation("CategoryHierarchy")
+  entries     KnowledgeEntry[]
+  createdAt   DateTime         @default(now())
+  updatedAt   DateTime         @updatedAt
+}
+
+model Tag {
+  id        String                 @id @default(cuid())
+  name      String                 @unique
+  slug      String                 @unique
+  color     String                 @default("#3b82f6")
+  entries   TagsOnKnowledgeEntry[]
+  createdAt DateTime               @default(now())
+  updatedAt DateTime               @updatedAt
+}
+
+model KnowledgeEntry {
+  id                  String            @id @default(cuid())
+  readableId          String            @unique // e.g. KB-1001
+  title               String
+  slug                String            @unique
+  status              EntryStatus       @default(VALIDATED)
+  confidenceLevel     ConfidenceLevel   @default(VALIDATED)
+  authorName          String            @default("Lead Engineer")
+  isFavorite          Boolean           @default(false)
+  viewCount           Int               @default(0)
+  qualityScore        Int               @default(80)
+  lastTestedAt        DateTime?
+  createdAt           DateTime          @default(now())
+  updatedAt           DateTime          @updatedAt
+
+  // Classification
+  categoryId          String
+  category            Category          @relation(fields: [categoryId], references: [id], onDelete: Cascade)
+  subcategoryId       String?
+  environment         String            @default("Production")
+  technologies        String            @default("[]") // JSON string array
+  tools               String            @default("[]") // JSON string array
+  affectedSystems     String            @default("[]") // JSON string array
+  affectedProjects    String            @default("[]") // JSON string array
+
+  // Problem & Context
+  problemDescription  String            @db.Text
+  contextDescription  String            @db.Text
+  symptoms            String            @db.Text
+  errorMessage        String            @db.Text
+  triggerConditions   String            @default("") @db.Text
+
+  // Root Cause Analysis
+  rootCause           String            @db.Text
+  secondaryCauses     String?           @db.Text
+  responsibleComponent String?
+  triggerFactor       String?
+  rootCauseCategory   RootCauseCategory @default(CONFIGURATION)
+
+  // Resolution & Validation
+  quickSolution       String            @db.Text
+  validationTested    Boolean           @default(true)
+  validationEnvironment String?
+  validationResult    String?
+  hasRegression       Boolean           @default(false)
+
+  // Relational details
+  tags                TagsOnKnowledgeEntry[]
+  investigations      InvestigationStep[]
+  resolutionSteps     ResolutionStep[]
+  commands            CommandSnippet[]
+  resources           ResourceLink[]
+  sourceRelations     EntryRelation[]   @relation("SourceEntry")
+  targetRelations     EntryRelation[]   @relation("TargetEntry")
+  resolutionHistories ResolutionHistory[]
+  versions            EntryVersion[]
+  comments            Comment[]
+  attachments         Attachment[]
+
+  @@index([categoryId])
+  @@index([status])
+  @@index([confidenceLevel])
+  @@index([isFavorite])
+  @@index([createdAt])
+}
+
+model TagsOnKnowledgeEntry {
+  entryId   String
+  entry     KnowledgeEntry @relation(fields: [entryId], references: [id], onDelete: Cascade)
+  tagId     String
+  tag       Tag            @relation(fields: [tagId], references: [id], onDelete: Cascade)
+  createdAt DateTime       @default(now())
+
+  @@id([entryId, tagId])
+}
+
+model InvestigationStep {
+  id          String         @id @default(cuid())
+  entryId     String
+  entry       KnowledgeEntry @relation(fields: [entryId], references: [id], onDelete: Cascade)
+  stepNumber  Int
+  hypothesis  String         @db.Text
+  command     String?        @db.Text
+  result      String?        @db.Text
+  conclusion  String         @db.Text
+  createdAt   DateTime       @default(now())
+
+  @@index([entryId, stepNumber])
+}
+
+model ResolutionStep {
+  id             String         @id @default(cuid())
+  entryId        String
+  entry          KnowledgeEntry @relation(fields: [entryId], references: [id], onDelete: Cascade)
+  stepNumber     Int
+  title          String
+  description    String         @db.Text
+  command        String?        @db.Text
+  expectedResult String?        @db.Text
+  actualResult   String?        @db.Text
+  notes          String?        @db.Text
+  order          Int            @default(0)
+  createdAt      DateTime       @default(now())
+
+  @@index([entryId, order])
+}
+
+model CommandSnippet {
+  id             String          @id @default(cuid())
+  entryId        String?
+  entry          KnowledgeEntry? @relation(fields: [entryId], references: [id], onDelete: Cascade)
+  language       String          @default("bash") // bash, powershell, python, sql, docker, yaml, json, http
+  command        String          @db.Text
+  description    String          @db.Text
+  context        String?         @db.Text
+  expectedOutput String?         @db.Text
+  tags           String          @default("[]") // JSON string array
+  createdAt      DateTime        @default(now())
+
+  @@index([entryId])
+  @@index([language])
+}
+
+model ResourceLink {
+  id           String         @id @default(cuid())
+  entryId      String
+  entry        KnowledgeEntry @relation(fields: [entryId], references: [id], onDelete: Cascade)
+  title        String
+  url          String
+  resourceType ResourceType   @default(OFFICIAL_DOC)
+  description  String?        @db.Text
+  source       String?
+  createdAt    DateTime       @default(now())
+
+  @@index([entryId])
+}
+
+model EntryRelation {
+  id            String         @id @default(cuid())
+  sourceEntryId String
+  sourceEntry   KnowledgeEntry @relation("SourceEntry", fields: [sourceEntryId], references: [id], onDelete: Cascade)
+  targetEntryId String
+  targetEntry   KnowledgeEntry @relation("TargetEntry", fields: [targetEntryId], references: [id], onDelete: Cascade)
+  relationType  RelationType   @default(SIMILAR_PROBLEM)
+  notes         String?        @db.Text
+  createdAt     DateTime       @default(now())
+
+  @@index([sourceEntryId])
+  @@index([targetEntryId])
+}
+
+model ResolutionHistory {
+  id           String           @id @default(cuid())
+  entryId      String
+  entry        KnowledgeEntry   @relation(fields: [entryId], references: [id], onDelete: Cascade)
+  testedAt     DateTime         @default(now())
+  testerName   String           @default("Engineer")
+  environment  String           @default("Production")
+  resultStatus ResolutionStatus @default(SUCCESS)
+  notes        String           @db.Text
+  createdAt    DateTime         @default(now())
+
+  @@index([entryId])
+}
+
+model EntryVersion {
+  id            String         @id @default(cuid())
+  entryId       String
+  entry         KnowledgeEntry @relation(fields: [entryId], references: [id], onDelete: Cascade)
+  versionNumber Int
+  snapshotData  String         @db.Text // Full JSON snapshot of the entry at this version
+  modifiedBy    String         @default("Engineer")
+  changeSummary String         @db.Text
+  createdAt     DateTime       @default(now())
+
+  @@index([entryId, versionNumber])
+}
+
+model Comment {
+  id         String         @id @default(cuid())
+  entryId    String
+  entry      KnowledgeEntry @relation(fields: [entryId], references: [id], onDelete: Cascade)
+  authorName String
+  content    String         @db.Text
+  createdAt  DateTime       @default(now())
+  updatedAt  DateTime       @updatedAt
+
+  @@index([entryId])
+}
+
+model Attachment {
+  id               String         @id @default(cuid())
+  entryId          String
+  entry            KnowledgeEntry @relation(fields: [entryId], references: [id], onDelete: Cascade)
+  fileName         String
+  fileUrl          String
+  fileType         String
+  fileSize         Int
+  secretScanStatus String         @default("CLEAN") // CLEAN, WARNING, BLOCKED
+  createdAt        DateTime       @default(now())
+
+  @@index([entryId])
+}
+
+model AuditLog {
+  id         String   @id @default(cuid())
+  userName   String   @default("Engineer")
+  action     String   // CREATED, UPDATED, DELETED, EXPORTED, IMPORTED, RESOLUTION_TESTED
+  entityType String   // ENTRY, CATEGORY, TAG, COMMAND, EXPORT
+  entityId   String?
+  details    String   @db.Text // JSON string
+  createdAt  DateTime @default(now())
+
+  @@index([createdAt])
+  @@index([action])
+}
